@@ -54,13 +54,19 @@ const makeTrack = (kind: TrackKind, name?: string): SequenceTrack => ({
   solo: false,
 });
 /** Default sequence: video tracks listed bottom-up (V1 first), then audio top-down (A1 first). */
-const makeDefaultTracks = (): SequenceTrack[] => [
-  { ...makeTrack("broll"), id: "trk_v_broll" },
-  { ...makeTrack("subtitle"), id: "trk_v_subtitle" },
-  { ...makeTrack("motion"), id: "trk_v_motion" },
-  { ...makeTrack("voice"), id: "trk_a_voice" },
-  { ...makeTrack("sfx"), id: "trk_a_sfx" },
-];
+const makeDefaultTracks = (): SequenceTrack[] =>
+  SHOW_AI_DIRECTOR
+    ? [
+        { ...makeTrack("broll"), id: "trk_v_broll" },
+        { ...makeTrack("subtitle"), id: "trk_v_subtitle" },
+        { ...makeTrack("motion"), id: "trk_v_motion" },
+        { ...makeTrack("voice"), id: "trk_a_voice" },
+        { ...makeTrack("sfx"), id: "trk_a_sfx" },
+      ]
+    : [
+        { ...makeTrack("subtitle"), id: "trk_v_subtitle" },
+        { ...makeTrack("voice"), id: "trk_a_voice" },
+      ];
 
 type IconName =
   | "upload"
@@ -200,123 +206,15 @@ function Icon({
 
 type Cue = CueItem;
 const initialCues: Cue[] = [
-  {
-    start: 0,
-    end: 1.2,
-    text: "عندك فكرة تغيّر كل شيء",
-    visual_plan: {
-      emphasis_type: "pop",
-      emoji_or_icon: "💡",
-      broll_query: "creative startup founder brainstorming",
-      motion_graphic: "none",
-      graphic_text: "",
-      sfx_trigger: "whoosh",
-    },
-  },
-  {
-    start: 1.2,
-    end: 3.2,
-    text: "بس مش عارف من وين تبدأ",
-    visual_plan: {
-      emphasis_type: "shake_red",
-      emoji_or_icon: "❌",
-      broll_query: "stressed entrepreneur looking at screen",
-      motion_graphic: "stat_badge",
-      graphic_text: "80% des projets échouent ❌",
-      sfx_trigger: "error",
-    },
-  },
-  {
-    start: 3.2,
-    end: 5.8,
-    text: "كاش ستارتاب ولا أبليكاسيون",
-    visual_plan: {
-      emphasis_type: "pop",
-      emoji_or_icon: "🚀",
-      broll_query: "developer coding mobile application on laptop",
-      motion_graphic: "stat_badge",
-      graphic_text: "SaaS & Mobile App 🚀",
-      sfx_trigger: "pop",
-    },
-  },
-  {
-    start: 5.8,
-    end: 8.4,
-    text: "الموضوع أبسط مما تتخيّل",
-    visual_plan: {
-      emphasis_type: "bounce",
-      emoji_or_icon: "✨",
-      broll_query: "modern minimalist tech workspace",
-      motion_graphic: "none",
-      graphic_text: "",
-      sfx_trigger: "whoosh",
-    },
-  },
-  {
-    start: 8.4,
-    end: 11.2,
-    text: "ابدأ بالمشكلة مش بالحل",
-    visual_plan: {
-      emphasis_type: "shake_red",
-      emoji_or_icon: "🎯",
-      broll_query: "team analyzing problem on whiteboard",
-      motion_graphic: "stat_badge",
-      graphic_text: "Focus sur le Problème 🎯",
-      sfx_trigger: "click",
-    },
-  },
-  {
-    start: 11.2,
-    end: 14.3,
-    text: "واسأل الناس شو بيحتاجوا",
-    visual_plan: {
-      emphasis_type: "normal",
-      emoji_or_icon: "🗣️",
-      broll_query: "customer interview feedback conversation",
-      motion_graphic: "none",
-      graphic_text: "",
-      sfx_trigger: "pop",
-    },
-  },
-  {
-    start: 14.3,
-    end: 18.5,
-    text: "قدّم قيمة حقيقية للناس",
-    visual_plan: {
-      emphasis_type: "pop",
-      emoji_or_icon: "💰",
-      broll_query: "business growth chart success",
-      motion_graphic: "stat_badge",
-      graphic_text: "10x Valeur Réelle 💰",
-      sfx_trigger: "cash",
-    },
-  },
-  {
-    start: 18.5,
-    end: 23,
-    text: "وبعدين خلّي شغلك يحكي",
-    visual_plan: {
-      emphasis_type: "bounce",
-      emoji_or_icon: "🔥",
-      broll_query: "product launch presentation stage",
-      motion_graphic: "cta_bio",
-      graphic_text: "Full System in Bio 🔗",
-      sfx_trigger: "whoosh",
-    },
-  },
-  {
-    start: 23,
-    end: 28,
-    text: "كل رحلة بتبدأ بخطوة",
-    visual_plan: {
-      emphasis_type: "pop",
-      emoji_or_icon: "🚀",
-      broll_query: "ambitious founder walking in city",
-      motion_graphic: "cta_follow",
-      graphic_text: "Follow for Part 2 🚀",
-      sfx_trigger: "pop",
-    },
-  },
+  { start: 0, end: 1.2, text: "عندك فكرة تغيّر كل شيء" },
+  { start: 1.2, end: 3.2, text: "بس مش عارف من وين تبدأ" },
+  { start: 3.2, end: 5.8, text: "كاش ستارتاب ولا أبليكاسيون" },
+  { start: 5.8, end: 8.4, text: "الموضوع أبسط مما تتخيّل" },
+  { start: 8.4, end: 11.2, text: "ابدأ بالمشكلة مش بالحل" },
+  { start: 11.2, end: 14.3, text: "واسأل الناس شو بيحتاجوا" },
+  { start: 14.3, end: 18.5, text: "قدّم قيمة حقيقية للناس" },
+  { start: 18.5, end: 23, text: "وبعدين خلّي شغلك يحكي" },
+  { start: 23, end: 28, text: "كل رحلة بتبدأ بخطوة" },
 ];
 type Style = {
   box: string;
@@ -348,10 +246,10 @@ const defaultAISettings: AISettingsConfig = {
   targetLanguage: "darija_mixed",
   wordsPerLine: 4,
   maxLines: 1,
-  enableKineticText: true,
-  enableEmojis: true,
+  enableKineticText: false,
+  enableEmojis: false,
   enableMotionGraphics: false,
-  enableSfx: true,
+  enableSfx: false,
   enableBroll: false,
   sfxVolumeDb: -12,
 };
@@ -1224,8 +1122,12 @@ export default function App() {
   // Premiere-style track model helpers
   // ------------------------------------------------------------------------
   const isVideoKind = (k: TrackKind) => TRACK_KIND_META[k].video;
-  const videoTracks = tracks.filter((t) => isVideoKind(t.kind)); // index 0 = V1 (bottom)
-  const audioTracks = tracks.filter((t) => !isVideoKind(t.kind)); // index 0 = A1 (top)
+  const videoTracks = tracks.filter(
+    (t) => isVideoKind(t.kind) && (SHOW_AI_DIRECTOR || t.kind === "subtitle"),
+  ); // index 0 = V1 (bottom)
+  const audioTracks = tracks.filter(
+    (t) => !isVideoKind(t.kind) && (SHOW_AI_DIRECTOR || t.kind === "voice"),
+  ); // index 0 = A1 (top)
   const trackById = (id?: string | null) => (id ? tracks.find((t) => t.id === id) : undefined);
   const trackTag = (t: SequenceTrack) =>
     isVideoKind(t.kind)
@@ -3981,7 +3883,7 @@ export default function App() {
                       <span>
                         {stamp(cue.start)} <span className="time-arrow">→</span> {stamp(cue.end)}
                       </span>
-                      {vp && (
+                      {SHOW_AI_DIRECTOR && vp && (
                         <span className="cue-ai-badges">
                           {vp.emoji_or_icon && (
                             <span className="cue-mini-badge emoji" title="3D Emoji">
@@ -4045,7 +3947,7 @@ export default function App() {
                         )
                       }
                     />
-                    {selectedCue === i && (
+                    {SHOW_AI_DIRECTOR && selectedCue === i && (
                       <div
                         className="cue-director-inline"
                         onClick={(e) => e.stopPropagation()}
@@ -4315,7 +4217,8 @@ export default function App() {
                   className={`phone-canvas ${style.bg === "transparent" ? "checkerboard" : ""}`}
                   style={{ backgroundColor: style.bg }}
                 >
-                  {aiSettings.enableBroll &&
+                  {SHOW_AI_DIRECTOR &&
+                    aiSettings.enableBroll &&
                     currentCue?.broll_preview_url &&
                     cueBrollVisible(currentCue) && (
                       <video
@@ -4333,7 +4236,7 @@ export default function App() {
                     )}
                   <div className="canvas-safe-area" />
                   {(() => {
-                    if (!aiSettings.enableMotionGraphics) return null;
+                    if (!SHOW_AI_DIRECTOR || !aiSettings.enableMotionGraphics) return null;
                     const activeMotionCueIdx = cues.findIndex((c) => {
                       const vp = c.visual_plan;
                       if (!vp || !vp.motion_graphic || vp.motion_graphic === "none") return false;
@@ -4474,7 +4377,8 @@ export default function App() {
                               height: `${highlightBoxRect.h}px`,
                               backgroundColor:
                                 currentCue?.visual_plan?.highlight_color_override ||
-                                (aiSettings.enableKineticText &&
+                                (SHOW_AI_DIRECTOR &&
+                                aiSettings.enableKineticText &&
                                 currentCue?.visual_plan?.emphasis_type === "shake_red"
                                   ? "#FF2A2A"
                                   : style.box),
@@ -4487,10 +4391,12 @@ export default function App() {
                             {lineIdx > 0 && <br />}
                             {lineWords.map(({ word, globalIndex }, wordIdxInLine) => {
                               const isActive = globalIndex === activeWord;
-                              const empType = aiSettings.enableKineticText
-                                ? currentCue?.visual_plan?.emphasis_type || "normal"
-                                : "normal";
+                              const empType =
+                                SHOW_AI_DIRECTOR && aiSettings.enableKineticText
+                                  ? currentCue?.visual_plan?.emphasis_type || "normal"
+                                  : "normal";
                               const emojiIcon =
+                                SHOW_AI_DIRECTOR &&
                                 aiSettings.enableEmojis &&
                                 currentCue?.visual_plan?.emoji_or_icon
                                   ? currentCue.visual_plan.emoji_or_icon
@@ -4640,20 +4546,24 @@ export default function App() {
                   >
                     + Cue
                   </button>
-                  <button
-                    className="tool-pill motion-pill"
-                    title="Add or Suggest Motion Graphic for caption at playhead"
-                    onClick={addMotionAtPlayhead}
-                  >
-                    ✨ + Motion
-                  </button>
-                  <button
-                    className="tool-pill sfx-pill"
-                    title="Add Sound Effect (SFX) clip at playhead"
-                    onClick={() => addSfxAtPlayhead("whoosh")}
-                  >
-                    🔊 + SFX
-                  </button>
+                  {SHOW_AI_DIRECTOR && (
+                    <>
+                      <button
+                        className="tool-pill motion-pill"
+                        title="Add or Suggest Motion Graphic for caption at playhead"
+                        onClick={addMotionAtPlayhead}
+                      >
+                        ✨ + Motion
+                      </button>
+                      <button
+                        className="tool-pill sfx-pill"
+                        title="Add Sound Effect (SFX) clip at playhead"
+                        onClick={() => addSfxAtPlayhead("whoosh")}
+                      >
+                        🔊 + SFX
+                      </button>
+                    </>
+                  )}
                   <div className="track-add-dropdown-wrap">
                     <button
                       type="button"
@@ -5537,26 +5447,30 @@ export default function App() {
                   >
                     + Add Video Track (Above)
                   </button>
-                  <button
-                    type="button"
-                    className="nle-cm-item"
-                    onClick={() => {
-                      addTrack("motion", trackMenu.trackId, "above");
-                      setTrackMenu(null);
-                    }}
-                  >
-                    ✨ Add Motion FX Track
-                  </button>
-                  <button
-                    type="button"
-                    className="nle-cm-item"
-                    onClick={() => {
-                      addTrack("broll", trackMenu.trackId, "above");
-                      setTrackMenu(null);
-                    }}
-                  >
-                    🎬 Add B-Roll Track
-                  </button>
+                  {SHOW_AI_DIRECTOR && (
+                    <>
+                      <button
+                        type="button"
+                        className="nle-cm-item"
+                        onClick={() => {
+                          addTrack("motion", trackMenu.trackId, "above");
+                          setTrackMenu(null);
+                        }}
+                      >
+                        ✨ Add Motion FX Track
+                      </button>
+                      <button
+                        type="button"
+                        className="nle-cm-item"
+                        onClick={() => {
+                          addTrack("broll", trackMenu.trackId, "above");
+                          setTrackMenu(null);
+                        }}
+                      >
+                        🎬 Add B-Roll Track
+                      </button>
+                    </>
+                  )}
                   <div className="nle-cm-divider" />
                   <button
                     type="button"
@@ -5568,6 +5482,18 @@ export default function App() {
                   >
                     🎙️ Add Voice Audio Track
                   </button>
+                  {SHOW_AI_DIRECTOR && (
+                    <button
+                      type="button"
+                      className="nle-cm-item"
+                      onClick={() => {
+                        addTrack("sfx", trackMenu.trackId, "below");
+                        setTrackMenu(null);
+                      }}
+                    >
+                      🔊 Add Sound FX Track
+                    </button>
+                  )}
                   <button
                     type="button"
                     className="nle-cm-item"
