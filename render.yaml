@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: medsub-backend
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: HORMOZISUB_CORS_ORIGINS
+        value: "*"
+      - key: HORMOZISUB_MAX_RENDERS
+        value: "1"
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: UNSPLASH_ACCESS_KEY
+        sync: false
+      - key: PEXELS_API_KEY
+        sync: false
+      - key: PIXABAY_API_KEY
+        sync: false
