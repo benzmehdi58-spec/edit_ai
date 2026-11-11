@@ -1,0 +1,10 @@
+{
+  "description": "Create Arabic Hormozi-style video captions with editable transcripts, word highlights, typography, and chroma-key backgrounds for polished social videos.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
