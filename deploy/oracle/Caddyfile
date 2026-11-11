@@ -1,0 +1,12 @@
+{$DOMAIN} {
+	request_body {
+		max_size 500MB
+	}
+	reverse_proxy app:7860 {
+		flush_interval -1
+		transport http {
+			read_timeout 30m
+			response_header_timeout 30m
+		}
+	}
+}

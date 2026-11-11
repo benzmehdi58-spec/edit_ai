@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      PORT: "7860"
+      HOST: "0.0.0.0"
+      HORMOZISUB_CORS_ORIGINS: "${CORS_ORIGINS:-*}"
+    volumes:
+      - medsub_storage:/app/backend/storage
+    expose:
+      - "7860"
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: "${DOMAIN}"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  medsub_storage:
+  caddy_data:
+  caddy_config:
