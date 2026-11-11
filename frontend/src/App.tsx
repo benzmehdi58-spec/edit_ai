@@ -1,3 +1,4 @@
+import { LOGO_URL } from "./logo";
 import {
   Fragment,
   useEffect,
@@ -3642,7 +3643,7 @@ export default function App() {
                 setCurrentView("welcome");
               }}
             >
-              <img className="brand-icon" src="/medsub-logo.png" alt="" width="42" height="42" />
+              <img className="brand-icon" src={LOGO_URL} alt="" width="42" height="42" />
               <span className="brand-wordmark">
                 <span>
                   Med<span className="brand-accent">Sub</span>

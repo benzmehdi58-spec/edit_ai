@@ -1,3 +1,4 @@
+import { LOGO_URL } from "../logo";
 import { useEffect, useRef, useState } from "react";
 import type { MedSubProject } from "../types/project";
 
@@ -86,7 +87,7 @@ export function DesktopTitleBar({
     <div className="desktop-titlebar" ref={barRef}>
       <div className="desktop-titlebar-left">
         <div className="desktop-app-logo">
-          <img src="/medsub-logo.png" alt="MedSub" />
+          <img src={LOGO_URL} alt="MedSub" />
           <span>MedSub Studio</span>
         </div>
 

@@ -1,3 +1,4 @@
+import { LOGO_URL } from "../logo";
 import type { RecentProjectItem } from "../types/project";
 
 interface WelcomeScreenProps {
@@ -39,7 +40,7 @@ export function WelcomeScreen({
       <aside className="welcome-sidebar">
         <div>
           <div className="welcome-brand">
-            <img src="/medsub-logo.png" alt="MedSub Logo" />
+            <img src={LOGO_URL} alt="MedSub Logo" />
             <div>
               <h1>MedSub Studio</h1>
               <p>Arabic & Mixed Caption Editor</p>
